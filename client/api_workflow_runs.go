@@ -165,7 +165,7 @@ func (r WorkflowRunsAPIGetWorkflowRunRequest) Execute() (*WorkflowRun, *http.Res
 /*
 GetWorkflowRun Get a workflow run by ID
 
-Retrieves the current state of a workflow run, including status, outputs, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
+Retrieves the current state of a workflow run, including status, outputs, aggregated token usage, cost, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Workflow run ID

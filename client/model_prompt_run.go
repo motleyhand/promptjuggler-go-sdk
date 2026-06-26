@@ -34,6 +34,10 @@ type PromptRun struct {
 	Output NullableString `json:"output,omitempty"`
 	// Error message if the run failed. Null on success.
 	Error NullableString `json:"error,omitempty"`
+	// Token usage for the successful run. Null while pending or when the run failed.
+	TokenUsage NullableTokenUsage `json:"tokenUsage,omitempty"`
+	// Cost breakdown for the run. Null while pending.
+	Cost NullableRunCost `json:"cost,omitempty"`
 }
 
 type _PromptRun PromptRun
@@ -259,6 +263,92 @@ func (o *PromptRun) UnsetError() {
 	o.Error.Unset()
 }
 
+// GetTokenUsage returns the TokenUsage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PromptRun) GetTokenUsage() TokenUsage {
+	if o == nil || IsNil(o.TokenUsage.Get()) {
+		var ret TokenUsage
+		return ret
+	}
+	return *o.TokenUsage.Get()
+}
+
+// GetTokenUsageOk returns a tuple with the TokenUsage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PromptRun) GetTokenUsageOk() (*TokenUsage, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TokenUsage.Get(), o.TokenUsage.IsSet()
+}
+
+// HasTokenUsage returns a boolean if a field has been set.
+func (o *PromptRun) HasTokenUsage() bool {
+	if o != nil && o.TokenUsage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenUsage gets a reference to the given NullableTokenUsage and assigns it to the TokenUsage field.
+func (o *PromptRun) SetTokenUsage(v TokenUsage) {
+	o.TokenUsage.Set(&v)
+}
+
+// SetTokenUsageNil sets the value for TokenUsage to be an explicit nil
+func (o *PromptRun) SetTokenUsageNil() {
+	o.TokenUsage.Set(nil)
+}
+
+// UnsetTokenUsage ensures that no value is present for TokenUsage, not even an explicit nil
+func (o *PromptRun) UnsetTokenUsage() {
+	o.TokenUsage.Unset()
+}
+
+// GetCost returns the Cost field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PromptRun) GetCost() RunCost {
+	if o == nil || IsNil(o.Cost.Get()) {
+		var ret RunCost
+		return ret
+	}
+	return *o.Cost.Get()
+}
+
+// GetCostOk returns a tuple with the Cost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PromptRun) GetCostOk() (*RunCost, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cost.Get(), o.Cost.IsSet()
+}
+
+// HasCost returns a boolean if a field has been set.
+func (o *PromptRun) HasCost() bool {
+	if o != nil && o.Cost.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCost gets a reference to the given NullableRunCost and assigns it to the Cost field.
+func (o *PromptRun) SetCost(v RunCost) {
+	o.Cost.Set(&v)
+}
+
+// SetCostNil sets the value for Cost to be an explicit nil
+func (o *PromptRun) SetCostNil() {
+	o.Cost.Set(nil)
+}
+
+// UnsetCost ensures that no value is present for Cost, not even an explicit nil
+func (o *PromptRun) UnsetCost() {
+	o.Cost.Unset()
+}
+
 func (o PromptRun) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -280,6 +370,12 @@ func (o PromptRun) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Error.IsSet() {
 		toSerialize["error"] = o.Error.Get()
+	}
+	if o.TokenUsage.IsSet() {
+		toSerialize["tokenUsage"] = o.TokenUsage.Get()
+	}
+	if o.Cost.IsSet() {
+		toSerialize["cost"] = o.Cost.Get()
 	}
 	return toSerialize, nil
 }

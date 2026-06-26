@@ -34,6 +34,10 @@ type WorkflowRun struct {
 	Outputs map[string]string `json:"outputs"`
 	// List of error messages from failed nodes. Empty array on success.
 	Errors []string `json:"errors"`
+	// Aggregated token usage across the workflow run. Null while pending.
+	TokenUsage NullableTokenUsage `json:"tokenUsage,omitempty"`
+	// Aggregated cost breakdown across the workflow run. Null while pending.
+	Cost NullableRunCost `json:"cost,omitempty"`
 }
 
 type _WorkflowRun WorkflowRun
@@ -223,6 +227,92 @@ func (o *WorkflowRun) SetErrors(v []string) {
 	o.Errors = v
 }
 
+// GetTokenUsage returns the TokenUsage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowRun) GetTokenUsage() TokenUsage {
+	if o == nil || IsNil(o.TokenUsage.Get()) {
+		var ret TokenUsage
+		return ret
+	}
+	return *o.TokenUsage.Get()
+}
+
+// GetTokenUsageOk returns a tuple with the TokenUsage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowRun) GetTokenUsageOk() (*TokenUsage, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TokenUsage.Get(), o.TokenUsage.IsSet()
+}
+
+// HasTokenUsage returns a boolean if a field has been set.
+func (o *WorkflowRun) HasTokenUsage() bool {
+	if o != nil && o.TokenUsage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenUsage gets a reference to the given NullableTokenUsage and assigns it to the TokenUsage field.
+func (o *WorkflowRun) SetTokenUsage(v TokenUsage) {
+	o.TokenUsage.Set(&v)
+}
+
+// SetTokenUsageNil sets the value for TokenUsage to be an explicit nil
+func (o *WorkflowRun) SetTokenUsageNil() {
+	o.TokenUsage.Set(nil)
+}
+
+// UnsetTokenUsage ensures that no value is present for TokenUsage, not even an explicit nil
+func (o *WorkflowRun) UnsetTokenUsage() {
+	o.TokenUsage.Unset()
+}
+
+// GetCost returns the Cost field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowRun) GetCost() RunCost {
+	if o == nil || IsNil(o.Cost.Get()) {
+		var ret RunCost
+		return ret
+	}
+	return *o.Cost.Get()
+}
+
+// GetCostOk returns a tuple with the Cost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowRun) GetCostOk() (*RunCost, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cost.Get(), o.Cost.IsSet()
+}
+
+// HasCost returns a boolean if a field has been set.
+func (o *WorkflowRun) HasCost() bool {
+	if o != nil && o.Cost.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCost gets a reference to the given NullableRunCost and assigns it to the Cost field.
+func (o *WorkflowRun) SetCost(v RunCost) {
+	o.Cost.Set(&v)
+}
+
+// SetCostNil sets the value for Cost to be an explicit nil
+func (o *WorkflowRun) SetCostNil() {
+	o.Cost.Set(nil)
+}
+
+// UnsetCost ensures that no value is present for Cost, not even an explicit nil
+func (o *WorkflowRun) UnsetCost() {
+	o.Cost.Unset()
+}
+
 func (o WorkflowRun) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -241,6 +331,12 @@ func (o WorkflowRun) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["outputs"] = o.Outputs
 	toSerialize["errors"] = o.Errors
+	if o.TokenUsage.IsSet() {
+		toSerialize["tokenUsage"] = o.TokenUsage.Get()
+	}
+	if o.Cost.IsSet() {
+		toSerialize["cost"] = o.Cost.Get()
+	}
 	return toSerialize, nil
 }
 
