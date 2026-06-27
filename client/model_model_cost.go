@@ -21,11 +21,11 @@ var _ MappedNullable = &ModelCost{}
 
 // ModelCost struct for ModelCost
 type ModelCost struct {
-	Input       float32         `json:"input"`
-	CachedInput NullableFloat32 `json:"cachedInput,omitempty"`
-	Output      float32         `json:"output"`
-	WebSearch   *float32        `json:"webSearch,omitempty"`
-	Total       float32         `json:"total"`
+	Input       float32 `json:"input"`
+	CachedInput float32 `json:"cachedInput"`
+	Output      float32 `json:"output"`
+	WebSearch   float32 `json:"webSearch"`
+	Total       float32 `json:"total"`
 }
 
 type _ModelCost ModelCost
@@ -34,12 +34,12 @@ type _ModelCost ModelCost
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelCost(input float32, output float32, total float32) *ModelCost {
+func NewModelCost(input float32, cachedInput float32, output float32, webSearch float32, total float32) *ModelCost {
 	this := ModelCost{}
 	this.Input = input
+	this.CachedInput = cachedInput
 	this.Output = output
-	var webSearch float32 = 0
-	this.WebSearch = &webSearch
+	this.WebSearch = webSearch
 	this.Total = total
 	return &this
 }
@@ -49,8 +49,6 @@ func NewModelCost(input float32, output float32, total float32) *ModelCost {
 // but it doesn't guarantee that properties required by API are set
 func NewModelCostWithDefaults() *ModelCost {
 	this := ModelCost{}
-	var webSearch float32 = 0
-	this.WebSearch = &webSearch
 	return &this
 }
 
@@ -78,47 +76,28 @@ func (o *ModelCost) SetInput(v float32) {
 	o.Input = v
 }
 
-// GetCachedInput returns the CachedInput field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCachedInput returns the CachedInput field value
 func (o *ModelCost) GetCachedInput() float32 {
-	if o == nil || IsNil(o.CachedInput.Get()) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.CachedInput.Get()
+
+	return o.CachedInput
 }
 
-// GetCachedInputOk returns a tuple with the CachedInput field value if set, nil otherwise
+// GetCachedInputOk returns a tuple with the CachedInput field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ModelCost) GetCachedInputOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.CachedInput.Get(), o.CachedInput.IsSet()
+	return &o.CachedInput, true
 }
 
-// HasCachedInput returns a boolean if a field has been set.
-func (o *ModelCost) HasCachedInput() bool {
-	if o != nil && o.CachedInput.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCachedInput gets a reference to the given NullableFloat32 and assigns it to the CachedInput field.
+// SetCachedInput sets field value
 func (o *ModelCost) SetCachedInput(v float32) {
-	o.CachedInput.Set(&v)
-}
-
-// SetCachedInputNil sets the value for CachedInput to be an explicit nil
-func (o *ModelCost) SetCachedInputNil() {
-	o.CachedInput.Set(nil)
-}
-
-// UnsetCachedInput ensures that no value is present for CachedInput, not even an explicit nil
-func (o *ModelCost) UnsetCachedInput() {
-	o.CachedInput.Unset()
+	o.CachedInput = v
 }
 
 // GetOutput returns the Output field value
@@ -145,36 +124,28 @@ func (o *ModelCost) SetOutput(v float32) {
 	o.Output = v
 }
 
-// GetWebSearch returns the WebSearch field value if set, zero value otherwise.
+// GetWebSearch returns the WebSearch field value
 func (o *ModelCost) GetWebSearch() float32 {
-	if o == nil || IsNil(o.WebSearch) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.WebSearch
+
+	return o.WebSearch
 }
 
-// GetWebSearchOk returns a tuple with the WebSearch field value if set, nil otherwise
+// GetWebSearchOk returns a tuple with the WebSearch field value
 // and a boolean to check if the value has been set.
 func (o *ModelCost) GetWebSearchOk() (*float32, bool) {
-	if o == nil || IsNil(o.WebSearch) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WebSearch, true
+	return &o.WebSearch, true
 }
 
-// HasWebSearch returns a boolean if a field has been set.
-func (o *ModelCost) HasWebSearch() bool {
-	if o != nil && !IsNil(o.WebSearch) {
-		return true
-	}
-
-	return false
-}
-
-// SetWebSearch gets a reference to the given float32 and assigns it to the WebSearch field.
+// SetWebSearch sets field value
 func (o *ModelCost) SetWebSearch(v float32) {
-	o.WebSearch = &v
+	o.WebSearch = v
 }
 
 // GetTotal returns the Total field value
@@ -212,13 +183,9 @@ func (o ModelCost) MarshalJSON() ([]byte, error) {
 func (o ModelCost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["input"] = o.Input
-	if o.CachedInput.IsSet() {
-		toSerialize["cachedInput"] = o.CachedInput.Get()
-	}
+	toSerialize["cachedInput"] = o.CachedInput
 	toSerialize["output"] = o.Output
-	if !IsNil(o.WebSearch) {
-		toSerialize["webSearch"] = o.WebSearch
-	}
+	toSerialize["webSearch"] = o.WebSearch
 	toSerialize["total"] = o.Total
 	return toSerialize, nil
 }
@@ -229,7 +196,9 @@ func (o *ModelCost) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"input",
+		"cachedInput",
 		"output",
+		"webSearch",
 		"total",
 	}
 
