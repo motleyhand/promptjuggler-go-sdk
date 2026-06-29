@@ -31,16 +31,15 @@ const (
 	MODEL_GPT_5_1                Model = "gpt-5.1"
 	MODEL_GPT_4_1                Model = "gpt-4.1"
 	MODEL_GPT_4_1_MINI           Model = "gpt-4.1-mini"
-	MODEL_O1_MINI                Model = "o1-mini"
 	MODEL_GPT_4O                 Model = "gpt-4o"
 	MODEL_GPT_4O_MINI            Model = "gpt-4o-mini"
 	MODEL_GEMINI_3_1_PRO_PREVIEW Model = "gemini-3.1-pro-preview"
+	MODEL_GEMINI_3_5_FLASH       Model = "gemini-3.5-flash"
 	MODEL_GEMINI_3_FLASH_PREVIEW Model = "gemini-3-flash-preview"
+	MODEL_GEMINI_3_1_FLASH_LITE  Model = "gemini-3.1-flash-lite"
 	MODEL_GEMINI_2_5_PRO         Model = "gemini-2.5-pro"
 	MODEL_GEMINI_2_5_FLASH       Model = "gemini-2.5-flash"
 	MODEL_GEMINI_2_5_FLASH_LITE  Model = "gemini-2.5-flash-lite"
-	MODEL_GEMINI_2_0_FLASH       Model = "gemini-2.0-flash"
-	MODEL_GEMINI_2_0_FLASH_LITE  Model = "gemini-2.0-flash-lite"
 	MODEL_CLAUDE_OPUS_4_8        Model = "claude-opus-4-8"
 	MODEL_CLAUDE_OPUS_4_7        Model = "claude-opus-4-7"
 	MODEL_CLAUDE_OPUS_4_6        Model = "claude-opus-4-6"
@@ -63,16 +62,15 @@ var AllowedModelEnumValues = []Model{
 	"gpt-5.1",
 	"gpt-4.1",
 	"gpt-4.1-mini",
-	"o1-mini",
 	"gpt-4o",
 	"gpt-4o-mini",
 	"gemini-3.1-pro-preview",
+	"gemini-3.5-flash",
 	"gemini-3-flash-preview",
+	"gemini-3.1-flash-lite",
 	"gemini-2.5-pro",
 	"gemini-2.5-flash",
 	"gemini-2.5-flash-lite",
-	"gemini-2.0-flash",
-	"gemini-2.0-flash-lite",
 	"claude-opus-4-8",
 	"claude-opus-4-7",
 	"claude-opus-4-6",
