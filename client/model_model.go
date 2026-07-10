@@ -40,10 +40,12 @@ const (
 	MODEL_GEMINI_2_5_PRO         Model = "gemini-2.5-pro"
 	MODEL_GEMINI_2_5_FLASH       Model = "gemini-2.5-flash"
 	MODEL_GEMINI_2_5_FLASH_LITE  Model = "gemini-2.5-flash-lite"
+	MODEL_CLAUDE_FABLE_5         Model = "claude-fable-5"
 	MODEL_CLAUDE_OPUS_4_8        Model = "claude-opus-4-8"
 	MODEL_CLAUDE_OPUS_4_7        Model = "claude-opus-4-7"
 	MODEL_CLAUDE_OPUS_4_6        Model = "claude-opus-4-6"
 	MODEL_CLAUDE_OPUS_4_5        Model = "claude-opus-4-5"
+	MODEL_CLAUDE_SONNET_5        Model = "claude-sonnet-5"
 	MODEL_CLAUDE_SONNET_4_6      Model = "claude-sonnet-4-6"
 	MODEL_CLAUDE_SONNET_4_5      Model = "claude-sonnet-4-5"
 	MODEL_CLAUDE_HAIKU_4_5       Model = "claude-haiku-4-5"
@@ -71,10 +73,12 @@ var AllowedModelEnumValues = []Model{
 	"gemini-2.5-pro",
 	"gemini-2.5-flash",
 	"gemini-2.5-flash-lite",
+	"claude-fable-5",
 	"claude-opus-4-8",
 	"claude-opus-4-7",
 	"claude-opus-4-6",
 	"claude-opus-4-5",
+	"claude-sonnet-5",
 	"claude-sonnet-4-6",
 	"claude-sonnet-4-5",
 	"claude-haiku-4-5",
