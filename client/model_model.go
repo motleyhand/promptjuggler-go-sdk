@@ -20,6 +20,9 @@ type Model string
 
 // List of Model
 const (
+	MODEL_GPT_5_6_SOL            Model = "gpt-5.6-sol"
+	MODEL_GPT_5_6_TERRA          Model = "gpt-5.6-terra"
+	MODEL_GPT_5_6_LUNA           Model = "gpt-5.6-luna"
 	MODEL_GPT_5_5                Model = "gpt-5.5"
 	MODEL_GPT_5_5_PRO            Model = "gpt-5.5-pro"
 	MODEL_GPT_5_4                Model = "gpt-5.4"
@@ -53,6 +56,9 @@ const (
 
 // All allowed values of Model enum
 var AllowedModelEnumValues = []Model{
+	"gpt-5.6-sol",
+	"gpt-5.6-terra",
+	"gpt-5.6-luna",
 	"gpt-5.5",
 	"gpt-5.5-pro",
 	"gpt-5.4",
