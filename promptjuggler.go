@@ -149,6 +149,23 @@ func (c *Client) GetWorkflowRun(ctx context.Context, runID string) (*client.Work
 	return run, nil
 }
 
+// CreateStreamToken mints a short-lived, thread-scoped credential for the streaming endpoint.
+// Call this from your server and hand the result to the browser — the API key must never reach
+// it. The response carries the fully-resolved SSE URL alongside the token, so clients need no
+// host configuration.
+//
+// Connect before triggering a run: tokens emitted while nobody is subscribed are not replayed.
+func (c *Client) CreateStreamToken(
+	ctx context.Context,
+	thread string,
+) (*client.StreamTokenResponse, error) {
+	token, resp, err := c.api.StreamingAPI.CreateStreamToken(ctx, thread).Execute()
+	if e := translate(resp, err); e != nil {
+		return nil, e
+	}
+	return token, nil
+}
+
 // GetKnowledgeBase fetches a knowledge base by slug.
 func (c *Client) GetKnowledgeBase(
 	ctx context.Context,

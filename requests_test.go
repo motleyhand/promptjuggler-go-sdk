@@ -146,6 +146,30 @@ func TestRunWorkflowPostsToWorkflowRuns(t *testing.T) {
 	}
 }
 
+func TestCreateStreamTokenPostsToThread(t *testing.T) {
+	body := `{"token":"jwt-value","expiresAt":"2026-01-01T00:00:00Z","url":"https://stream.promptjuggler.com/stream/` +
+		uuid1 + `"}`
+	m := newMockServer(http.StatusOK, body)
+	defer m.close()
+	token, err := m.client().CreateStreamToken(context.Background(), uuid1)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	req := m.first()
+	if req.method != http.MethodPost {
+		t.Errorf("method = %q, want POST", req.method)
+	}
+	if req.path != "/api/v1/threads/"+uuid1+"/stream-token" {
+		t.Errorf("path = %q", req.path)
+	}
+	if token.Token != "jwt-value" {
+		t.Errorf("token = %q", token.Token)
+	}
+	if token.Url != "https://stream.promptjuggler.com/stream/"+uuid1 {
+		t.Errorf("url = %q", token.Url)
+	}
+}
+
 func TestGetKnowledgeBaseGetsBySlug(t *testing.T) {
 	kb := `{"id":"` + uuid1 + `","status":"ready","documentCount":0,"chunkCount":0,"documents":[]}`
 	m := newMockServer(http.StatusOK, kb)
