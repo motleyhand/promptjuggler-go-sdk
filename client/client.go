@@ -54,6 +54,8 @@ type APIClient struct {
 
 	PromptsAPI *PromptsAPIService
 
+	StreamingAPI *StreamingAPIService
+
 	WorkflowRunsAPI *WorkflowRunsAPIService
 }
 
@@ -76,6 +78,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.KnowledgeBasesAPI = (*KnowledgeBasesAPIService)(&c.common)
 	c.PromptRunsAPI = (*PromptRunsAPIService)(&c.common)
 	c.PromptsAPI = (*PromptsAPIService)(&c.common)
+	c.StreamingAPI = (*StreamingAPIService)(&c.common)
 	c.WorkflowRunsAPI = (*WorkflowRunsAPIService)(&c.common)
 
 	return c
