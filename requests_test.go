@@ -118,7 +118,7 @@ func TestRunPromptSerializesOptionsAndArrayMetadata(t *testing.T) {
 }
 
 func TestGetPromptRunGetsByID(t *testing.T) {
-	run := `{"id":"` + uuid1 + `","status":"completed","createdAt":"2026-01-01T00:00:00Z"}`
+	run := `{"id":"` + uuid1 + `","status":"completed","createdAt":"2026-01-01T00:00:00Z","emitted":[]}`
 	m := newMockServer(http.StatusOK, run)
 	defer m.close()
 	if _, err := m.client().GetPromptRun(context.Background(), uuid1); err != nil {

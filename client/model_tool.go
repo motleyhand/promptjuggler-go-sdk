@@ -17,6 +17,7 @@ import (
 
 // Tool - struct for Tool
 type Tool struct {
+	Emit            *Emit
 	HttpCall        *HttpCall
 	KnowledgeSearch *KnowledgeSearch
 	Mcp             *Mcp
@@ -24,6 +25,13 @@ type Tool struct {
 	ScriptCall      *ScriptCall
 	WebSearch       *WebSearch
 	WorkflowCall    *WorkflowCall
+}
+
+// EmitAsTool is a convenience function that returns Emit wrapped in Tool
+func EmitAsTool(v *Emit) Tool {
+	return Tool{
+		Emit: v,
+	}
 }
 
 // HttpCallAsTool is a convenience function that returns HttpCall wrapped in Tool
@@ -83,6 +91,18 @@ func (dst *Tool) UnmarshalJSON(data []byte) error {
 	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'emit'
+	if jsonDict["type"] == "emit" {
+		// try to unmarshal JSON data into Emit
+		err = json.Unmarshal(data, &dst.Emit)
+		if err == nil {
+			return nil // data stored in dst.Emit, return on the first match
+		} else {
+			dst.Emit = nil
+			return fmt.Errorf("failed to unmarshal Tool as Emit: %s", err.Error())
+		}
 	}
 
 	// check if the discriminator value is 'http'
@@ -174,6 +194,10 @@ func (dst *Tool) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Tool) MarshalJSON() ([]byte, error) {
+	if src.Emit != nil {
+		return json.Marshal(&src.Emit)
+	}
+
 	if src.HttpCall != nil {
 		return json.Marshal(&src.HttpCall)
 	}
@@ -210,6 +234,10 @@ func (obj *Tool) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
+	if obj.Emit != nil {
+		return obj.Emit
+	}
+
 	if obj.HttpCall != nil {
 		return obj.HttpCall
 	}
@@ -244,6 +272,10 @@ func (obj *Tool) GetActualInstance() interface{} {
 
 // Get the actual instance value
 func (obj Tool) GetActualInstanceValue() interface{} {
+	if obj.Emit != nil {
+		return *obj.Emit
+	}
+
 	if obj.HttpCall != nil {
 		return *obj.HttpCall
 	}

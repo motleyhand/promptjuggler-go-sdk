@@ -32,6 +32,8 @@ type PromptRun struct {
 	FinishedAt NullableTime `json:"finishedAt,omitempty"`
 	// LLM output text. Null while pending or when the run failed.
 	Output NullableString `json:"output,omitempty"`
+	// Payloads produced by emit tools during this run, in call order. Empty until the run completes.
+	Emitted []EmittedItem `json:"emitted"`
 	// Error message if the run failed. Null on success.
 	Error NullableString `json:"error,omitempty"`
 	// Token usage for the successful run. Null while pending or when the run failed.
@@ -46,11 +48,12 @@ type _PromptRun PromptRun
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPromptRun(id string, status RunStatus, createdAt time.Time) *PromptRun {
+func NewPromptRun(id string, status RunStatus, createdAt time.Time, emitted []EmittedItem) *PromptRun {
 	this := PromptRun{}
 	this.Id = id
 	this.Status = status
 	this.CreatedAt = createdAt
+	this.Emitted = emitted
 	return &this
 }
 
@@ -220,6 +223,30 @@ func (o *PromptRun) UnsetOutput() {
 	o.Output.Unset()
 }
 
+// GetEmitted returns the Emitted field value
+func (o *PromptRun) GetEmitted() []EmittedItem {
+	if o == nil {
+		var ret []EmittedItem
+		return ret
+	}
+
+	return o.Emitted
+}
+
+// GetEmittedOk returns a tuple with the Emitted field value
+// and a boolean to check if the value has been set.
+func (o *PromptRun) GetEmittedOk() ([]EmittedItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Emitted, true
+}
+
+// SetEmitted sets field value
+func (o *PromptRun) SetEmitted(v []EmittedItem) {
+	o.Emitted = v
+}
+
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PromptRun) GetError() string {
 	if o == nil || IsNil(o.Error.Get()) {
@@ -368,6 +395,7 @@ func (o PromptRun) ToMap() (map[string]interface{}, error) {
 	if o.Output.IsSet() {
 		toSerialize["output"] = o.Output.Get()
 	}
+	toSerialize["emitted"] = o.Emitted
 	if o.Error.IsSet() {
 		toSerialize["error"] = o.Error.Get()
 	}
@@ -388,6 +416,7 @@ func (o *PromptRun) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"status",
 		"createdAt",
+		"emitted",
 	}
 
 	allProperties := make(map[string]interface{})
