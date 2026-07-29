@@ -23,8 +23,6 @@ var _ MappedNullable = &Emit{}
 type Emit struct {
 	// JSON schema of the payload this tool emits.
 	ParamsSchema string `json:"paramsSchema"`
-	// Whether to also splice the payload into the output text as an emit:<name> markdown fence at the call position.
-	Inline bool `json:"inline"`
 	// The tool’s name.
 	Name string `json:"name" validate:"regexp=[a-zA-Z0-9_-]+"`
 	// The tool’s description.
@@ -40,10 +38,9 @@ type _Emit Emit
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmit(paramsSchema string, inline bool, name string, type_ string) *Emit {
+func NewEmit(paramsSchema string, name string, type_ string) *Emit {
 	this := Emit{}
 	this.ParamsSchema = paramsSchema
-	this.Inline = inline
 	this.Name = name
 	var failFast bool = false
 	this.FailFast = &failFast
@@ -83,30 +80,6 @@ func (o *Emit) GetParamsSchemaOk() (*string, bool) {
 // SetParamsSchema sets field value
 func (o *Emit) SetParamsSchema(v string) {
 	o.ParamsSchema = v
-}
-
-// GetInline returns the Inline field value
-func (o *Emit) GetInline() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Inline
-}
-
-// GetInlineOk returns a tuple with the Inline field value
-// and a boolean to check if the value has been set.
-func (o *Emit) GetInlineOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Inline, true
-}
-
-// SetInline sets field value
-func (o *Emit) SetInline(v bool) {
-	o.Inline = v
 }
 
 // GetName returns the Name field value
@@ -243,7 +216,6 @@ func (o Emit) MarshalJSON() ([]byte, error) {
 func (o Emit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["paramsSchema"] = o.ParamsSchema
-	toSerialize["inline"] = o.Inline
 	toSerialize["name"] = o.Name
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
@@ -261,7 +233,6 @@ func (o *Emit) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"paramsSchema",
-		"inline",
 		"name",
 		"type",
 	}
