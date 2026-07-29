@@ -34,6 +34,8 @@ type PromptRun struct {
 	Output NullableString `json:"output,omitempty"`
 	// Payloads produced by emit tools during this run, in call order. Empty until the run completes.
 	Emitted []EmittedItem `json:"emitted"`
+	// The run as a renderable sequence: assistant text, the tools it used, and emit payloads in position. Empty until the run completes. `output` remains the flat text for callers that only need the answer.
+	Transcript []TranscriptItem `json:"transcript"`
 	// Error message if the run failed. Null on success.
 	Error NullableString `json:"error,omitempty"`
 	// Token usage for the successful run. Null while pending or when the run failed.
@@ -48,12 +50,13 @@ type _PromptRun PromptRun
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPromptRun(id string, status RunStatus, createdAt time.Time, emitted []EmittedItem) *PromptRun {
+func NewPromptRun(id string, status RunStatus, createdAt time.Time, emitted []EmittedItem, transcript []TranscriptItem) *PromptRun {
 	this := PromptRun{}
 	this.Id = id
 	this.Status = status
 	this.CreatedAt = createdAt
 	this.Emitted = emitted
+	this.Transcript = transcript
 	return &this
 }
 
@@ -247,6 +250,30 @@ func (o *PromptRun) SetEmitted(v []EmittedItem) {
 	o.Emitted = v
 }
 
+// GetTranscript returns the Transcript field value
+func (o *PromptRun) GetTranscript() []TranscriptItem {
+	if o == nil {
+		var ret []TranscriptItem
+		return ret
+	}
+
+	return o.Transcript
+}
+
+// GetTranscriptOk returns a tuple with the Transcript field value
+// and a boolean to check if the value has been set.
+func (o *PromptRun) GetTranscriptOk() ([]TranscriptItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Transcript, true
+}
+
+// SetTranscript sets field value
+func (o *PromptRun) SetTranscript(v []TranscriptItem) {
+	o.Transcript = v
+}
+
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PromptRun) GetError() string {
 	if o == nil || IsNil(o.Error.Get()) {
@@ -396,6 +423,7 @@ func (o PromptRun) ToMap() (map[string]interface{}, error) {
 		toSerialize["output"] = o.Output.Get()
 	}
 	toSerialize["emitted"] = o.Emitted
+	toSerialize["transcript"] = o.Transcript
 	if o.Error.IsSet() {
 		toSerialize["error"] = o.Error.Get()
 	}
@@ -417,6 +445,7 @@ func (o *PromptRun) UnmarshalJSON(data []byte) (err error) {
 		"status",
 		"createdAt",
 		"emitted",
+		"transcript",
 	}
 
 	allProperties := make(map[string]interface{})
