@@ -22,10 +22,8 @@ var _ MappedNullable = &VersionRef{}
 // VersionRef A reference to a revision.
 type VersionRef struct {
 	// Definition – prompt or workflow – ID.
-	DefinitionId string `json:"definitionId"`
-	// Deprecated alias of definitionId.
-	ParentId NullableString    `json:"parentId,omitempty"`
-	IdOrTag  VersionRefIdOrTag `json:"idOrTag"`
+	DefinitionId string            `json:"definitionId"`
+	IdOrTag      VersionRefIdOrTag `json:"idOrTag"`
 }
 
 type _VersionRef VersionRef
@@ -73,49 +71,6 @@ func (o *VersionRef) SetDefinitionId(v string) {
 	o.DefinitionId = v
 }
 
-// GetParentId returns the ParentId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VersionRef) GetParentId() string {
-	if o == nil || IsNil(o.ParentId.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.ParentId.Get()
-}
-
-// GetParentIdOk returns a tuple with the ParentId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VersionRef) GetParentIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ParentId.Get(), o.ParentId.IsSet()
-}
-
-// HasParentId returns a boolean if a field has been set.
-func (o *VersionRef) HasParentId() bool {
-	if o != nil && o.ParentId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetParentId gets a reference to the given NullableString and assigns it to the ParentId field.
-func (o *VersionRef) SetParentId(v string) {
-	o.ParentId.Set(&v)
-}
-
-// SetParentIdNil sets the value for ParentId to be an explicit nil
-func (o *VersionRef) SetParentIdNil() {
-	o.ParentId.Set(nil)
-}
-
-// UnsetParentId ensures that no value is present for ParentId, not even an explicit nil
-func (o *VersionRef) UnsetParentId() {
-	o.ParentId.Unset()
-}
-
 // GetIdOrTag returns the IdOrTag field value
 func (o *VersionRef) GetIdOrTag() VersionRefIdOrTag {
 	if o == nil {
@@ -151,9 +106,6 @@ func (o VersionRef) MarshalJSON() ([]byte, error) {
 func (o VersionRef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["definitionId"] = o.DefinitionId
-	if o.ParentId.IsSet() {
-		toSerialize["parentId"] = o.ParentId.Get()
-	}
 	toSerialize["idOrTag"] = o.IdOrTag
 	return toSerialize, nil
 }
