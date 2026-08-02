@@ -28,7 +28,7 @@ type Emit struct {
 	// The tool’s description.
 	Description NullableString `json:"description,omitempty"`
 	// Whether to stop processing if a tool call fails.
-	FailFast *bool  `json:"failFast,omitempty"`
+	FailFast bool   `json:"failFast"`
 	Type     string `json:"type"`
 }
 
@@ -38,12 +38,11 @@ type _Emit Emit
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmit(paramsSchema string, name string, type_ string) *Emit {
+func NewEmit(paramsSchema string, name string, failFast bool, type_ string) *Emit {
 	this := Emit{}
 	this.ParamsSchema = paramsSchema
 	this.Name = name
-	var failFast bool = false
-	this.FailFast = &failFast
+	this.FailFast = failFast
 	this.Type = type_
 	return &this
 }
@@ -53,8 +52,6 @@ func NewEmit(paramsSchema string, name string, type_ string) *Emit {
 // but it doesn't guarantee that properties required by API are set
 func NewEmitWithDefaults() *Emit {
 	this := Emit{}
-	var failFast bool = false
-	this.FailFast = &failFast
 	return &this
 }
 
@@ -149,36 +146,28 @@ func (o *Emit) UnsetDescription() {
 	o.Description.Unset()
 }
 
-// GetFailFast returns the FailFast field value if set, zero value otherwise.
+// GetFailFast returns the FailFast field value
 func (o *Emit) GetFailFast() bool {
-	if o == nil || IsNil(o.FailFast) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.FailFast
+
+	return o.FailFast
 }
 
-// GetFailFastOk returns a tuple with the FailFast field value if set, nil otherwise
+// GetFailFastOk returns a tuple with the FailFast field value
 // and a boolean to check if the value has been set.
 func (o *Emit) GetFailFastOk() (*bool, bool) {
-	if o == nil || IsNil(o.FailFast) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FailFast, true
+	return &o.FailFast, true
 }
 
-// HasFailFast returns a boolean if a field has been set.
-func (o *Emit) HasFailFast() bool {
-	if o != nil && !IsNil(o.FailFast) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailFast gets a reference to the given bool and assigns it to the FailFast field.
+// SetFailFast sets field value
 func (o *Emit) SetFailFast(v bool) {
-	o.FailFast = &v
+	o.FailFast = v
 }
 
 // GetType returns the Type field value
@@ -220,9 +209,7 @@ func (o Emit) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.FailFast) {
-		toSerialize["failFast"] = o.FailFast
-	}
+	toSerialize["failFast"] = o.FailFast
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -234,6 +221,7 @@ func (o *Emit) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"paramsSchema",
 		"name",
+		"failFast",
 		"type",
 	}
 

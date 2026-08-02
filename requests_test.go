@@ -203,8 +203,8 @@ func TestDeleteKnowledgeDocumentDeletesByID(t *testing.T) {
 // generated oneOf wrapper — which must accept both a numeric ref and a tag.
 func TestVersionRefAcceptsNumericAndStringIdOrTag(t *testing.T) {
 	for _, raw := range []string{
-		`{"parentId":"` + uuid2 + `","idOrTag":1}`,
-		`{"parentId":"` + uuid2 + `","idOrTag":"production"}`,
+		`{"definitionId":"` + uuid2 + `","idOrTag":1}`,
+		`{"definitionId":"` + uuid2 + `","idOrTag":"production"}`,
 	} {
 		var ref client.VersionRef
 		if err := json.Unmarshal([]byte(raw), &ref); err != nil {

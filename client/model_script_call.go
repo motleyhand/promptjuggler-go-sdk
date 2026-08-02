@@ -30,7 +30,7 @@ type ScriptCall struct {
 	// The tool’s description.
 	Description NullableString `json:"description,omitempty"`
 	// Whether to stop processing if a tool call fails.
-	FailFast *bool  `json:"failFast,omitempty"`
+	FailFast bool   `json:"failFast"`
 	Type     string `json:"type"`
 }
 
@@ -40,13 +40,12 @@ type _ScriptCall ScriptCall
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScriptCall(language string, code string, name string, type_ string) *ScriptCall {
+func NewScriptCall(language string, code string, name string, failFast bool, type_ string) *ScriptCall {
 	this := ScriptCall{}
 	this.Language = language
 	this.Code = code
 	this.Name = name
-	var failFast bool = false
-	this.FailFast = &failFast
+	this.FailFast = failFast
 	this.Type = type_
 	return &this
 }
@@ -56,8 +55,6 @@ func NewScriptCall(language string, code string, name string, type_ string) *Scr
 // but it doesn't guarantee that properties required by API are set
 func NewScriptCallWithDefaults() *ScriptCall {
 	this := ScriptCall{}
-	var failFast bool = false
-	this.FailFast = &failFast
 	return &this
 }
 
@@ -176,36 +173,28 @@ func (o *ScriptCall) UnsetDescription() {
 	o.Description.Unset()
 }
 
-// GetFailFast returns the FailFast field value if set, zero value otherwise.
+// GetFailFast returns the FailFast field value
 func (o *ScriptCall) GetFailFast() bool {
-	if o == nil || IsNil(o.FailFast) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.FailFast
+
+	return o.FailFast
 }
 
-// GetFailFastOk returns a tuple with the FailFast field value if set, nil otherwise
+// GetFailFastOk returns a tuple with the FailFast field value
 // and a boolean to check if the value has been set.
 func (o *ScriptCall) GetFailFastOk() (*bool, bool) {
-	if o == nil || IsNil(o.FailFast) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FailFast, true
+	return &o.FailFast, true
 }
 
-// HasFailFast returns a boolean if a field has been set.
-func (o *ScriptCall) HasFailFast() bool {
-	if o != nil && !IsNil(o.FailFast) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailFast gets a reference to the given bool and assigns it to the FailFast field.
+// SetFailFast sets field value
 func (o *ScriptCall) SetFailFast(v bool) {
-	o.FailFast = &v
+	o.FailFast = v
 }
 
 // GetType returns the Type field value
@@ -248,9 +237,7 @@ func (o ScriptCall) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.FailFast) {
-		toSerialize["failFast"] = o.FailFast
-	}
+	toSerialize["failFast"] = o.FailFast
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -263,6 +250,7 @@ func (o *ScriptCall) UnmarshalJSON(data []byte) (err error) {
 		"language",
 		"code",
 		"name",
+		"failFast",
 		"type",
 	}
 

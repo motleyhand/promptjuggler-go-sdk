@@ -22,7 +22,9 @@ var _ MappedNullable = &VersionRef{}
 // VersionRef A reference to a revision.
 type VersionRef struct {
 	// Definition – prompt or workflow – ID.
-	ParentId string            `json:"parentId"`
+	DefinitionId string `json:"definitionId"`
+	// Deprecated alias of definitionId.
+	ParentId NullableString    `json:"parentId,omitempty"`
 	IdOrTag  VersionRefIdOrTag `json:"idOrTag"`
 }
 
@@ -32,9 +34,9 @@ type _VersionRef VersionRef
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVersionRef(parentId string, idOrTag VersionRefIdOrTag) *VersionRef {
+func NewVersionRef(definitionId string, idOrTag VersionRefIdOrTag) *VersionRef {
 	this := VersionRef{}
-	this.ParentId = parentId
+	this.DefinitionId = definitionId
 	this.IdOrTag = idOrTag
 	return &this
 }
@@ -47,28 +49,71 @@ func NewVersionRefWithDefaults() *VersionRef {
 	return &this
 }
 
-// GetParentId returns the ParentId field value
-func (o *VersionRef) GetParentId() string {
+// GetDefinitionId returns the DefinitionId field value
+func (o *VersionRef) GetDefinitionId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ParentId
+	return o.DefinitionId
 }
 
-// GetParentIdOk returns a tuple with the ParentId field value
+// GetDefinitionIdOk returns a tuple with the DefinitionId field value
 // and a boolean to check if the value has been set.
+func (o *VersionRef) GetDefinitionIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DefinitionId, true
+}
+
+// SetDefinitionId sets field value
+func (o *VersionRef) SetDefinitionId(v string) {
+	o.DefinitionId = v
+}
+
+// GetParentId returns the ParentId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VersionRef) GetParentId() string {
+	if o == nil || IsNil(o.ParentId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ParentId.Get()
+}
+
+// GetParentIdOk returns a tuple with the ParentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VersionRef) GetParentIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ParentId, true
+	return o.ParentId.Get(), o.ParentId.IsSet()
 }
 
-// SetParentId sets field value
+// HasParentId returns a boolean if a field has been set.
+func (o *VersionRef) HasParentId() bool {
+	if o != nil && o.ParentId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetParentId gets a reference to the given NullableString and assigns it to the ParentId field.
 func (o *VersionRef) SetParentId(v string) {
-	o.ParentId = v
+	o.ParentId.Set(&v)
+}
+
+// SetParentIdNil sets the value for ParentId to be an explicit nil
+func (o *VersionRef) SetParentIdNil() {
+	o.ParentId.Set(nil)
+}
+
+// UnsetParentId ensures that no value is present for ParentId, not even an explicit nil
+func (o *VersionRef) UnsetParentId() {
+	o.ParentId.Unset()
 }
 
 // GetIdOrTag returns the IdOrTag field value
@@ -105,7 +150,10 @@ func (o VersionRef) MarshalJSON() ([]byte, error) {
 
 func (o VersionRef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["parentId"] = o.ParentId
+	toSerialize["definitionId"] = o.DefinitionId
+	if o.ParentId.IsSet() {
+		toSerialize["parentId"] = o.ParentId.Get()
+	}
 	toSerialize["idOrTag"] = o.IdOrTag
 	return toSerialize, nil
 }
@@ -115,7 +163,7 @@ func (o *VersionRef) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"parentId",
+		"definitionId",
 		"idOrTag",
 	}
 
