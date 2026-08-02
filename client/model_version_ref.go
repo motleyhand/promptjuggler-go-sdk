@@ -21,11 +21,11 @@ var _ MappedNullable = &VersionRef{}
 
 // VersionRef A reference to a revision.
 type VersionRef struct {
-	// Definition – prompt or workflow – ID.
-	DefinitionId string `json:"definitionId"`
 	// Deprecated alias of definitionId.
 	ParentId NullableString    `json:"parentId,omitempty"`
 	IdOrTag  VersionRefIdOrTag `json:"idOrTag"`
+	// Definition – prompt or workflow – ID.
+	DefinitionId string `json:"definitionId"`
 }
 
 type _VersionRef VersionRef
@@ -34,10 +34,10 @@ type _VersionRef VersionRef
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVersionRef(definitionId string, idOrTag VersionRefIdOrTag) *VersionRef {
+func NewVersionRef(idOrTag VersionRefIdOrTag, definitionId string) *VersionRef {
 	this := VersionRef{}
-	this.DefinitionId = definitionId
 	this.IdOrTag = idOrTag
+	this.DefinitionId = definitionId
 	return &this
 }
 
@@ -47,30 +47,6 @@ func NewVersionRef(definitionId string, idOrTag VersionRefIdOrTag) *VersionRef {
 func NewVersionRefWithDefaults() *VersionRef {
 	this := VersionRef{}
 	return &this
-}
-
-// GetDefinitionId returns the DefinitionId field value
-func (o *VersionRef) GetDefinitionId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.DefinitionId
-}
-
-// GetDefinitionIdOk returns a tuple with the DefinitionId field value
-// and a boolean to check if the value has been set.
-func (o *VersionRef) GetDefinitionIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DefinitionId, true
-}
-
-// SetDefinitionId sets field value
-func (o *VersionRef) SetDefinitionId(v string) {
-	o.DefinitionId = v
 }
 
 // GetParentId returns the ParentId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -140,6 +116,30 @@ func (o *VersionRef) SetIdOrTag(v VersionRefIdOrTag) {
 	o.IdOrTag = v
 }
 
+// GetDefinitionId returns the DefinitionId field value
+func (o *VersionRef) GetDefinitionId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DefinitionId
+}
+
+// GetDefinitionIdOk returns a tuple with the DefinitionId field value
+// and a boolean to check if the value has been set.
+func (o *VersionRef) GetDefinitionIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DefinitionId, true
+}
+
+// SetDefinitionId sets field value
+func (o *VersionRef) SetDefinitionId(v string) {
+	o.DefinitionId = v
+}
+
 func (o VersionRef) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -150,11 +150,11 @@ func (o VersionRef) MarshalJSON() ([]byte, error) {
 
 func (o VersionRef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["definitionId"] = o.DefinitionId
 	if o.ParentId.IsSet() {
 		toSerialize["parentId"] = o.ParentId.Get()
 	}
 	toSerialize["idOrTag"] = o.IdOrTag
+	toSerialize["definitionId"] = o.DefinitionId
 	return toSerialize, nil
 }
 
@@ -163,8 +163,8 @@ func (o *VersionRef) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"definitionId",
 		"idOrTag",
+		"definitionId",
 	}
 
 	allProperties := make(map[string]interface{})
