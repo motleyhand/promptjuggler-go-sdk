@@ -40,7 +40,7 @@ type PromptRun struct {
 	Error NullableString `json:"error,omitempty"`
 	// Token usage for the successful run. Null while pending or when the run failed.
 	TokenUsage NullableTokenUsage `json:"tokenUsage,omitempty"`
-	// Cost breakdown for the run. Null while pending.
+	// Cost breakdown for the run. Null while pending, or when no published rate covers the run.
 	Cost NullableRunCost `json:"cost,omitempty"`
 }
 

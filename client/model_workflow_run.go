@@ -36,7 +36,7 @@ type WorkflowRun struct {
 	Errors []string `json:"errors"`
 	// Aggregated token usage across the workflow run. Null while pending.
 	TokenUsage NullableTokenUsage `json:"tokenUsage,omitempty"`
-	// Aggregated cost breakdown across the workflow run. Null while pending.
+	// Aggregated cost breakdown across the workflow run. Null while pending, or when no published rate covers one of its runs.
 	Cost NullableRunCost `json:"cost,omitempty"`
 }
 
