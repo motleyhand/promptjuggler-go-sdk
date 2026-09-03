@@ -30,9 +30,9 @@ type WorkflowRun struct {
 	CreatedAt time.Time `json:"createdAt"`
 	// Timestamp when the run finished. Null while the run is pending.
 	FinishedAt NullableTime `json:"finishedAt,omitempty"`
-	// Map of output node names to their values. Empty object while pending.
+	// Map of output node names to their values. Only completed output nodes appear, so a pending or failed run can return a partial map — read `status` for completeness.
 	Outputs map[string]string `json:"outputs"`
-	// List of error messages from failed nodes. Empty array on success.
+	// Node run messages: failures, warnings from nodes that completed anyway (e.g. a non-fail-fast assertion), and the latest error of a node still retrying. Non-empty does not mean the run failed — read `status`.
 	Errors []string `json:"errors"`
 	// Aggregated token usage across the workflow run. Null while pending.
 	TokenUsage NullableTokenUsage `json:"tokenUsage,omitempty"`

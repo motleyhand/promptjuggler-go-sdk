@@ -30,15 +30,15 @@ type PromptRun struct {
 	CreatedAt time.Time `json:"createdAt"`
 	// Timestamp when the run finished. Null while the run is pending.
 	FinishedAt NullableTime `json:"finishedAt,omitempty"`
-	// LLM output text. Null while pending or when the run failed.
+	// LLM output text produced so far; read `status` for completeness. Null when the run failed, or when the model returned no text — e.g. a turn that was only tool calls or only reasoning.
 	Output NullableString `json:"output,omitempty"`
 	// Payloads produced by emit tools during this run, in call order. Empty until the run completes.
 	Emitted []EmittedItem `json:"emitted"`
 	// The run as a renderable sequence: assistant text, the tools it used, and emit payloads in position. Empty until the run completes. `output` remains the flat text for callers that only need the answer.
 	Transcript []TranscriptItem `json:"transcript"`
-	// Error message if the run failed. Null on success.
+	// Error message from the latest failed attempt, kept even once a retry recovers — so a pending or completed run can carry one. Read `status` for the outcome.
 	Error NullableString `json:"error,omitempty"`
-	// Token usage for the successful run. Null while pending or when the run failed.
+	// Token usage accumulated over successful turns — a run that failed later still reports the earlier ones. Null until the first turn succeeds.
 	TokenUsage NullableTokenUsage `json:"tokenUsage,omitempty"`
 	// Cost breakdown for the run. Null while pending, or when no published rate covers the run.
 	Cost NullableRunCost `json:"cost,omitempty"`
