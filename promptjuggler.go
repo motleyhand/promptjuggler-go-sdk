@@ -1,6 +1,7 @@
 // Package promptjuggler is the official Go client for the PromptJuggler API. It wraps the
 // generated client (package client) with a flat, ergonomic surface: parameters in, generated
-// typed models out, with API errors translated into *APIError / *NetworkError. Synchronous.
+// typed models out, with errors translated into *APIError / *NetworkError / *DecodeError.
+// Synchronous.
 package promptjuggler
 
 import (
