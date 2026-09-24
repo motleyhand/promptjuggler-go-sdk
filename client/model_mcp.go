@@ -25,7 +25,7 @@ type Mcp struct {
 	Name string `json:"name" validate:"regexp=[a-zA-Z0-9_-]+"`
 	// The URL of the MCP server.
 	Url string `json:"url"`
-	// Authorization token for the MCP server.
+	// Environment variable holding the MCP server’s authorization token, referenced as ${NAME}.
 	AuthorizationToken NullableString `json:"authorizationToken,omitempty"`
 	// Tool names the model may call. Empty or omitted allows all of the server’s tools.
 	AllowedTools []string `json:"allowedTools,omitempty"`
