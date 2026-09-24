@@ -135,7 +135,6 @@ func (o *Citation) UnmarshalJSON(data []byte) (err error) {
 	varCitation := _Citation{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCitation)
 
 	if err != nil {

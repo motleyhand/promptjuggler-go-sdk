@@ -223,7 +223,6 @@ func (o *TranscriptTool) UnmarshalJSON(data []byte) (err error) {
 	varTranscriptTool := _TranscriptTool{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTranscriptTool)
 
 	if err != nil {

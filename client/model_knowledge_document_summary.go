@@ -224,7 +224,6 @@ func (o *KnowledgeDocumentSummary) UnmarshalJSON(data []byte) (err error) {
 	varKnowledgeDocumentSummary := _KnowledgeDocumentSummary{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varKnowledgeDocumentSummary)
 
 	if err != nil {

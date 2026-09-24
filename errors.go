@@ -32,7 +32,7 @@ func (e *NetworkError) Error() string {
 func (e *NetworkError) Unwrap() error { return e.Err }
 
 // DecodeError is returned when the API replied with a success status but the SDK could not decode
-// its body into the expected model — schema drift or an unknown enum value, typically. The
+// its body into the expected model — a missing required field or a mistyped value, typically. The
 // request succeeded; the client just couldn't read the response.
 type DecodeError struct {
 	StatusCode int

@@ -38,15 +38,9 @@ func (v *RunStatus) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := RunStatus(value)
-	for _, existing := range AllowedRunStatusEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid RunStatus", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = RunStatus(value)
+	return nil
 }
 
 // NewRunStatusFromValue returns a pointer to a valid RunStatus

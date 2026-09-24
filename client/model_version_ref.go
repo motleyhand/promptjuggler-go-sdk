@@ -136,7 +136,6 @@ func (o *VersionRef) UnmarshalJSON(data []byte) (err error) {
 	varVersionRef := _VersionRef{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varVersionRef)
 
 	if err != nil {

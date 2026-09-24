@@ -167,7 +167,6 @@ func (o *StreamTokenResponse) UnmarshalJSON(data []byte) (err error) {
 	varStreamTokenResponse := _StreamTokenResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varStreamTokenResponse)
 
 	if err != nil {

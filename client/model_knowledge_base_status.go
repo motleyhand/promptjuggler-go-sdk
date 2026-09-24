@@ -38,15 +38,9 @@ func (v *KnowledgeBaseStatus) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := KnowledgeBaseStatus(value)
-	for _, existing := range AllowedKnowledgeBaseStatusEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid KnowledgeBaseStatus", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = KnowledgeBaseStatus(value)
+	return nil
 }
 
 // NewKnowledgeBaseStatusFromValue returns a pointer to a valid KnowledgeBaseStatus

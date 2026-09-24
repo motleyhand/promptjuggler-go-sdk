@@ -388,7 +388,6 @@ func (o *PromptRevision) UnmarshalJSON(data []byte) (err error) {
 	varPromptRevision := _PromptRevision{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromptRevision)
 
 	if err != nil {

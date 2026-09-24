@@ -271,7 +271,6 @@ func (o *ScriptCall) UnmarshalJSON(data []byte) (err error) {
 	varScriptCall := _ScriptCall{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varScriptCall)
 
 	if err != nil {

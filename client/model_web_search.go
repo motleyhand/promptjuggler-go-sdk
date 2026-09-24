@@ -144,7 +144,6 @@ func (o *WebSearch) UnmarshalJSON(data []byte) (err error) {
 	varWebSearch := _WebSearch{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varWebSearch)
 
 	if err != nil {

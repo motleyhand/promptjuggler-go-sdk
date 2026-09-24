@@ -265,7 +265,6 @@ func (o *JsonSchemaFormat) UnmarshalJSON(data []byte) (err error) {
 	varJsonSchemaFormat := _JsonSchemaFormat{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varJsonSchemaFormat)
 
 	if err != nil {

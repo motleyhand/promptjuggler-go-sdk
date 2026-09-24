@@ -38,15 +38,9 @@ func (v *ToolStatus) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ToolStatus(value)
-	for _, existing := range AllowedToolStatusEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid ToolStatus", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = ToolStatus(value)
+	return nil
 }
 
 // NewToolStatusFromValue returns a pointer to a valid ToolStatus

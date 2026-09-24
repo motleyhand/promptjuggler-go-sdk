@@ -336,7 +336,6 @@ func (o *HttpCall) UnmarshalJSON(data []byte) (err error) {
 	varHttpCall := _HttpCall{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varHttpCall)
 
 	if err != nil {

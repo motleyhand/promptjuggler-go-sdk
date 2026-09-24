@@ -107,7 +107,6 @@ func (o *JsonObjectFormat) UnmarshalJSON(data []byte) (err error) {
 	varJsonObjectFormat := _JsonObjectFormat{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varJsonObjectFormat)
 
 	if err != nil {

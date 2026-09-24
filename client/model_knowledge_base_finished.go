@@ -195,7 +195,6 @@ func (o *KnowledgeBaseFinished) UnmarshalJSON(data []byte) (err error) {
 	varKnowledgeBaseFinished := _KnowledgeBaseFinished{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varKnowledgeBaseFinished)
 
 	if err != nil {

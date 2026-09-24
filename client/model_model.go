@@ -110,15 +110,9 @@ func (v *Model) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := Model(value)
-	for _, existing := range AllowedModelEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Model", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = Model(value)
+	return nil
 }
 
 // NewModelFromValue returns a pointer to a valid Model

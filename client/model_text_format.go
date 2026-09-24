@@ -107,7 +107,6 @@ func (o *TextFormat) UnmarshalJSON(data []byte) (err error) {
 	varTextFormat := _TextFormat{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTextFormat)
 
 	if err != nil {

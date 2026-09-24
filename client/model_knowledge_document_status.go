@@ -40,15 +40,9 @@ func (v *KnowledgeDocumentStatus) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := KnowledgeDocumentStatus(value)
-	for _, existing := range AllowedKnowledgeDocumentStatusEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid KnowledgeDocumentStatus", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = KnowledgeDocumentStatus(value)
+	return nil
 }
 
 // NewKnowledgeDocumentStatusFromValue returns a pointer to a valid KnowledgeDocumentStatus

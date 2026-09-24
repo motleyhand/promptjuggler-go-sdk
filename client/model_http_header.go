@@ -135,7 +135,6 @@ func (o *HttpHeader) UnmarshalJSON(data []byte) (err error) {
 	varHttpHeader := _HttpHeader{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varHttpHeader)
 
 	if err != nil {

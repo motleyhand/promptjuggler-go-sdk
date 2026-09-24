@@ -40,15 +40,9 @@ func (v *ServiceTier) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ServiceTier(value)
-	for _, existing := range AllowedServiceTierEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid ServiceTier", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = ServiceTier(value)
+	return nil
 }
 
 // NewServiceTierFromValue returns a pointer to a valid ServiceTier

@@ -40,15 +40,9 @@ func (v *Memory) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := Memory(value)
-	for _, existing := range AllowedMemoryEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Memory", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = Memory(value)
+	return nil
 }
 
 // NewMemoryFromValue returns a pointer to a valid Memory

@@ -465,7 +465,6 @@ func (o *PromptRun) UnmarshalJSON(data []byte) (err error) {
 	varPromptRun := _PromptRun{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromptRun)
 
 	if err != nil {

@@ -247,7 +247,6 @@ func (o *ModelCost) UnmarshalJSON(data []byte) (err error) {
 	varModelCost := _ModelCost{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varModelCost)
 
 	if err != nil {

@@ -137,7 +137,6 @@ func (o *EmittedItem) UnmarshalJSON(data []byte) (err error) {
 	varEmittedItem := _EmittedItem{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEmittedItem)
 
 	if err != nil {

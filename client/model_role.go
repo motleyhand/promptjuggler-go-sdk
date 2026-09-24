@@ -36,15 +36,9 @@ func (v *Role) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := Role(value)
-	for _, existing := range AllowedRoleEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Role", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = Role(value)
+	return nil
 }
 
 // NewRoleFromValue returns a pointer to a valid Role

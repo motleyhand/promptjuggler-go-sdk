@@ -224,7 +224,6 @@ func (o *KnowledgeDocumentResponse) UnmarshalJSON(data []byte) (err error) {
 	varKnowledgeDocumentResponse := _KnowledgeDocumentResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varKnowledgeDocumentResponse)
 
 	if err != nil {

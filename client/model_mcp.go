@@ -251,7 +251,6 @@ func (o *Mcp) UnmarshalJSON(data []byte) (err error) {
 	varMcp := _Mcp{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varMcp)
 
 	if err != nil {

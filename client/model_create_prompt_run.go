@@ -360,7 +360,6 @@ func (o *CreatePromptRun) UnmarshalJSON(data []byte) (err error) {
 	varCreatePromptRun := _CreatePromptRun{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreatePromptRun)
 
 	if err != nil {

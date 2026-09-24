@@ -137,7 +137,6 @@ func (o *PromptRunFinished) UnmarshalJSON(data []byte) (err error) {
 	varPromptRunFinished := _PromptRunFinished{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromptRunFinished)
 
 	if err != nil {

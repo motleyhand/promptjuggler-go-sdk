@@ -163,7 +163,6 @@ func (o *RunCost) UnmarshalJSON(data []byte) (err error) {
 	varRunCost := _RunCost{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRunCost)
 
 	if err != nil {

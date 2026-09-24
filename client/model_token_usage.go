@@ -295,7 +295,6 @@ func (o *TokenUsage) UnmarshalJSON(data []byte) (err error) {
 	varTokenUsage := _TokenUsage{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTokenUsage)
 
 	if err != nil {

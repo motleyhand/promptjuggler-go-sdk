@@ -38,15 +38,9 @@ func (v *Provider) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := Provider(value)
-	for _, existing := range AllowedProviderEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Provider", value)
+	// Keep a value newer than this SDK; IsValid reports whether the SDK lists it.
+	*v = Provider(value)
+	return nil
 }
 
 // NewProviderFromValue returns a pointer to a valid Provider

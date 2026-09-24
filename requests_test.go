@@ -60,6 +60,33 @@ func TestGetPromptAcceptsNumericVersion(t *testing.T) {
 	}
 }
 
+// The API adds fields and enum values without a major version, so a published client must decode
+// a response carrying ones it doesn't know.
+func TestGetPromptDecodesFieldsAndEnumValuesNewerThanTheSDK(t *testing.T) {
+	m := newMockServer(
+		http.StatusOK,
+		`{"id":"`+uuid1+`","promptId":"`+uuid2+`","memory":"stateless",`+
+			`"provider":"openai","model":"gpt-9","modelParams":{"reasoningEffort":"ultra"},`+
+			`"responseFormat":{"type":"text","addedLater":1},"messages":[],"tools":[{"type":"http",`+
+			`"name":"lookup","url":"https://example.com","method":"QUERY","paramsSchema":"{}",`+
+			`"failFast":false}],"addedLater":true}`,
+	)
+	defer m.close()
+	rev, err := m.client().GetPrompt(context.Background(), "greeting", "production")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if rev.Model != "gpt-9" || rev.Model.IsValid() {
+		t.Errorf("Model = %q, want gpt-9 kept and reported invalid", rev.Model)
+	}
+	if got := rev.ModelParams.GetReasoningEffort(); got != "ultra" {
+		t.Errorf("ReasoningEffort = %q, want ultra", got)
+	}
+	if tool := rev.Tools[0].HttpCall; tool == nil || tool.Method != "QUERY" {
+		t.Errorf("Tools[0] = %+v, want an HttpCall with method QUERY", rev.Tools[0])
+	}
+}
+
 func TestRunPromptPostsInputsOnly(t *testing.T) {
 	m := newMockServer(http.StatusOK, runResponseJSON)
 	defer m.close()

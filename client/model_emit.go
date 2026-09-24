@@ -242,7 +242,6 @@ func (o *Emit) UnmarshalJSON(data []byte) (err error) {
 	varEmit := _Emit{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEmit)
 
 	if err != nil {

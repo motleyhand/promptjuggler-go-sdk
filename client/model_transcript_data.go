@@ -165,7 +165,6 @@ func (o *TranscriptData) UnmarshalJSON(data []byte) (err error) {
 	varTranscriptData := _TranscriptData{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTranscriptData)
 
 	if err != nil {
