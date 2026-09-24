@@ -23,6 +23,7 @@ var _ MappedNullable = &ModelCost{}
 type ModelCost struct {
 	Input       float32 `json:"input"`
 	CachedInput float32 `json:"cachedInput"`
+	CacheWrite  float32 `json:"cacheWrite"`
 	Output      float32 `json:"output"`
 	WebSearch   float32 `json:"webSearch"`
 	Total       float32 `json:"total"`
@@ -34,10 +35,11 @@ type _ModelCost ModelCost
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelCost(input float32, cachedInput float32, output float32, webSearch float32, total float32) *ModelCost {
+func NewModelCost(input float32, cachedInput float32, cacheWrite float32, output float32, webSearch float32, total float32) *ModelCost {
 	this := ModelCost{}
 	this.Input = input
 	this.CachedInput = cachedInput
+	this.CacheWrite = cacheWrite
 	this.Output = output
 	this.WebSearch = webSearch
 	this.Total = total
@@ -98,6 +100,30 @@ func (o *ModelCost) GetCachedInputOk() (*float32, bool) {
 // SetCachedInput sets field value
 func (o *ModelCost) SetCachedInput(v float32) {
 	o.CachedInput = v
+}
+
+// GetCacheWrite returns the CacheWrite field value
+func (o *ModelCost) GetCacheWrite() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.CacheWrite
+}
+
+// GetCacheWriteOk returns a tuple with the CacheWrite field value
+// and a boolean to check if the value has been set.
+func (o *ModelCost) GetCacheWriteOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CacheWrite, true
+}
+
+// SetCacheWrite sets field value
+func (o *ModelCost) SetCacheWrite(v float32) {
+	o.CacheWrite = v
 }
 
 // GetOutput returns the Output field value
@@ -184,6 +210,7 @@ func (o ModelCost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["input"] = o.Input
 	toSerialize["cachedInput"] = o.CachedInput
+	toSerialize["cacheWrite"] = o.CacheWrite
 	toSerialize["output"] = o.Output
 	toSerialize["webSearch"] = o.WebSearch
 	toSerialize["total"] = o.Total
@@ -197,6 +224,7 @@ func (o *ModelCost) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"input",
 		"cachedInput",
+		"cacheWrite",
 		"output",
 		"webSearch",
 		"total",

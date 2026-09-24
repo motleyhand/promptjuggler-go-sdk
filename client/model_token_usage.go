@@ -21,12 +21,13 @@ var _ MappedNullable = &TokenUsage{}
 
 // TokenUsage struct for TokenUsage
 type TokenUsage struct {
-	Input       int32        `json:"input"`
-	InputCached int32        `json:"inputCached"`
-	Output      int32        `json:"output"`
-	Reasoning   int32        `json:"reasoning"`
-	Total       int32        `json:"total"`
-	ServiceTier *ServiceTier `json:"serviceTier,omitempty"`
+	Input           int32        `json:"input"`
+	InputCached     int32        `json:"inputCached"`
+	Output          int32        `json:"output"`
+	Reasoning       int32        `json:"reasoning"`
+	Total           int32        `json:"total"`
+	ServiceTier     *ServiceTier `json:"serviceTier,omitempty"`
+	InputCacheWrite *int32       `json:"inputCacheWrite,omitempty"`
 }
 
 type _TokenUsage TokenUsage
@@ -42,6 +43,8 @@ func NewTokenUsage(input int32, inputCached int32, output int32, reasoning int32
 	this.Output = output
 	this.Reasoning = reasoning
 	this.Total = total
+	var inputCacheWrite int32 = 0
+	this.InputCacheWrite = &inputCacheWrite
 	return &this
 }
 
@@ -50,6 +53,8 @@ func NewTokenUsage(input int32, inputCached int32, output int32, reasoning int32
 // but it doesn't guarantee that properties required by API are set
 func NewTokenUsageWithDefaults() *TokenUsage {
 	this := TokenUsage{}
+	var inputCacheWrite int32 = 0
+	this.InputCacheWrite = &inputCacheWrite
 	return &this
 }
 
@@ -205,6 +210,38 @@ func (o *TokenUsage) SetServiceTier(v ServiceTier) {
 	o.ServiceTier = &v
 }
 
+// GetInputCacheWrite returns the InputCacheWrite field value if set, zero value otherwise.
+func (o *TokenUsage) GetInputCacheWrite() int32 {
+	if o == nil || IsNil(o.InputCacheWrite) {
+		var ret int32
+		return ret
+	}
+	return *o.InputCacheWrite
+}
+
+// GetInputCacheWriteOk returns a tuple with the InputCacheWrite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TokenUsage) GetInputCacheWriteOk() (*int32, bool) {
+	if o == nil || IsNil(o.InputCacheWrite) {
+		return nil, false
+	}
+	return o.InputCacheWrite, true
+}
+
+// HasInputCacheWrite returns a boolean if a field has been set.
+func (o *TokenUsage) HasInputCacheWrite() bool {
+	if o != nil && !IsNil(o.InputCacheWrite) {
+		return true
+	}
+
+	return false
+}
+
+// SetInputCacheWrite gets a reference to the given int32 and assigns it to the InputCacheWrite field.
+func (o *TokenUsage) SetInputCacheWrite(v int32) {
+	o.InputCacheWrite = &v
+}
+
 func (o TokenUsage) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -222,6 +259,9 @@ func (o TokenUsage) ToMap() (map[string]interface{}, error) {
 	toSerialize["total"] = o.Total
 	if !IsNil(o.ServiceTier) {
 		toSerialize["serviceTier"] = o.ServiceTier
+	}
+	if !IsNil(o.InputCacheWrite) {
+		toSerialize["inputCacheWrite"] = o.InputCacheWrite
 	}
 	return toSerialize, nil
 }
