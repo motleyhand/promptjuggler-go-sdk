@@ -26,7 +26,7 @@ type HttpCall struct {
 	// The URL to call. Can contain ${ENV_VAR} and {{inputName}} placeholders.
 	Url    string `json:"url"`
 	Method string `json:"method"`
-	// The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders.
+	// The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders; a credential header (Authorization, *-Key, *-Token, …) must take its secret from one.
 	Headers []HttpHeader `json:"headers,omitempty"`
 	// The tool’s name.
 	Name string `json:"name" validate:"regexp=[a-zA-Z0-9_-]+"`
