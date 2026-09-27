@@ -21,6 +21,8 @@ type Model string
 // List of Model
 const (
 	MODEL_GPT_6_ASTRA            Model = "gpt-6-astra"
+	MODEL_GPT_6_SOL              Model = "gpt-6-sol"
+	MODEL_GPT_6_LUNA             Model = "gpt-6-luna"
 	MODEL_GPT_5_6_SOL            Model = "gpt-5.6-sol"
 	MODEL_GPT_5_6_TERRA          Model = "gpt-5.6-terra"
 	MODEL_GPT_5_6_LUNA           Model = "gpt-5.6-luna"
@@ -50,6 +52,7 @@ const (
 	MODEL_GEMINI_2_5_FLASH_LITE  Model = "gemini-2.5-flash-lite"
 	MODEL_CLAUDE_FABLE_5_1       Model = "claude-fable-5-1"
 	MODEL_CLAUDE_FABLE_5         Model = "claude-fable-5"
+	MODEL_CLAUDE_OPUS_5_5        Model = "claude-opus-5-5"
 	MODEL_CLAUDE_OPUS_5          Model = "claude-opus-5"
 	MODEL_CLAUDE_OPUS_4_8        Model = "claude-opus-4-8"
 	MODEL_CLAUDE_OPUS_4_7        Model = "claude-opus-4-7"
@@ -64,6 +67,8 @@ const (
 // All allowed values of Model enum
 var AllowedModelEnumValues = []Model{
 	"gpt-6-astra",
+	"gpt-6-sol",
+	"gpt-6-luna",
 	"gpt-5.6-sol",
 	"gpt-5.6-terra",
 	"gpt-5.6-luna",
@@ -93,6 +98,7 @@ var AllowedModelEnumValues = []Model{
 	"gemini-2.5-flash-lite",
 	"claude-fable-5-1",
 	"claude-fable-5",
+	"claude-opus-5-5",
 	"claude-opus-5",
 	"claude-opus-4-8",
 	"claude-opus-4-7",
