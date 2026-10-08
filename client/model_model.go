@@ -62,6 +62,7 @@ const (
 	MODEL_CLAUDE_SONNET_5_5      Model = "claude-sonnet-5-5"
 	MODEL_CLAUDE_SONNET_5        Model = "claude-sonnet-5"
 	MODEL_CLAUDE_SONNET_4_6      Model = "claude-sonnet-4-6"
+	MODEL_CLAUDE_HAIKU_5_5       Model = "claude-haiku-5-5"
 	MODEL_CLAUDE_HAIKU_4_5       Model = "claude-haiku-4-5"
 )
 
@@ -109,6 +110,7 @@ var AllowedModelEnumValues = []Model{
 	"claude-sonnet-5-5",
 	"claude-sonnet-5",
 	"claude-sonnet-4-6",
+	"claude-haiku-5-5",
 	"claude-haiku-4-5",
 }
 
