@@ -42,9 +42,7 @@ const (
 	MODEL_GPT_4O_MINI            Model = "gpt-4o-mini"
 	MODEL_GEMINI_3_1_PRO_PREVIEW Model = "gemini-3.1-pro-preview"
 	MODEL_GEMINI_3_8_FLASH       Model = "gemini-3.8-flash"
-	MODEL_GEMINI_3_7_FLASH       Model = "gemini-3.7-flash"
 	MODEL_GEMINI_3_6_FLASH       Model = "gemini-3.6-flash"
-	MODEL_GEMINI_3_5_FLASH       Model = "gemini-3.5-flash"
 	MODEL_GEMINI_3_FLASH_PREVIEW Model = "gemini-3-flash-preview"
 	MODEL_GEMINI_3_5_FLASH_LITE  Model = "gemini-3.5-flash-lite"
 	MODEL_GEMINI_3_1_FLASH_LITE  Model = "gemini-3.1-flash-lite"
@@ -90,9 +88,7 @@ var AllowedModelEnumValues = []Model{
 	"gpt-4o-mini",
 	"gemini-3.1-pro-preview",
 	"gemini-3.8-flash",
-	"gemini-3.7-flash",
 	"gemini-3.6-flash",
-	"gemini-3.5-flash",
 	"gemini-3-flash-preview",
 	"gemini-3.5-flash-lite",
 	"gemini-3.1-flash-lite",
