@@ -30,7 +30,7 @@ type PromptRevision struct {
 	// AI provider.
 	Provider Provider `json:"provider"`
 	// AI model.
-	Model Model `json:"model"`
+	Model string `json:"model"`
 	// Model parameters.
 	ModelParams ModelParams `json:"modelParams"`
 	// AI model response format.
@@ -49,7 +49,7 @@ type _PromptRevision PromptRevision
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPromptRevision(id string, promptId string, memory Memory, provider Provider, model Model, modelParams ModelParams, responseFormat ResponseFormat, messages []ContentMessageResponse, tools []Tool) *PromptRevision {
+func NewPromptRevision(id string, promptId string, memory Memory, provider Provider, model string, modelParams ModelParams, responseFormat ResponseFormat, messages []ContentMessageResponse, tools []Tool) *PromptRevision {
 	this := PromptRevision{}
 	this.Id = id
 	this.PromptId = promptId
@@ -168,9 +168,9 @@ func (o *PromptRevision) SetProvider(v Provider) {
 }
 
 // GetModel returns the Model field value
-func (o *PromptRevision) GetModel() Model {
+func (o *PromptRevision) GetModel() string {
 	if o == nil {
-		var ret Model
+		var ret string
 		return ret
 	}
 
@@ -179,7 +179,7 @@ func (o *PromptRevision) GetModel() Model {
 
 // GetModelOk returns a tuple with the Model field value
 // and a boolean to check if the value has been set.
-func (o *PromptRevision) GetModelOk() (*Model, bool) {
+func (o *PromptRevision) GetModelOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *PromptRevision) GetModelOk() (*Model, bool) {
 }
 
 // SetModel sets field value
-func (o *PromptRevision) SetModel(v Model) {
+func (o *PromptRevision) SetModel(v string) {
 	o.Model = v
 }
 

@@ -66,7 +66,7 @@ func TestGetPromptDecodesFieldsAndEnumValuesNewerThanTheSDK(t *testing.T) {
 	m := newMockServer(
 		http.StatusOK,
 		`{"id":"`+uuid1+`","promptId":"`+uuid2+`","memory":"stateless",`+
-			`"provider":"openai","model":"gpt-9","modelParams":{"reasoningEffort":"ultra"},`+
+			`"provider":"mistral","model":"gpt-9","modelParams":{"reasoningEffort":"ultra"},`+
 			`"responseFormat":{"type":"text","addedLater":1},"messages":[],"tools":[{"type":"http",`+
 			`"name":"lookup","url":"https://example.com","method":"QUERY","paramsSchema":"{}",`+
 			`"failFast":false}],"addedLater":true}`,
@@ -76,8 +76,11 @@ func TestGetPromptDecodesFieldsAndEnumValuesNewerThanTheSDK(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	if rev.Model != "gpt-9" || rev.Model.IsValid() {
-		t.Errorf("Model = %q, want gpt-9 kept and reported invalid", rev.Model)
+	if rev.Provider != "mistral" || rev.Provider.IsValid() {
+		t.Errorf("Provider = %q, want mistral kept and reported invalid", rev.Provider)
+	}
+	if rev.Model != "gpt-9" {
+		t.Errorf("Model = %q, want gpt-9", rev.Model)
 	}
 	if got := rev.ModelParams.GetReasoningEffort(); got != "ultra" {
 		t.Errorf("ReasoningEffort = %q, want ultra", got)
