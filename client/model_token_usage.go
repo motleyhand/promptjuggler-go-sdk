@@ -43,6 +43,8 @@ func NewTokenUsage(input int32, inputCached int32, output int32, reasoning int32
 	this.Output = output
 	this.Reasoning = reasoning
 	this.Total = total
+	var serviceTier ServiceTier = SERVICETIER_DEFAULT
+	this.ServiceTier = &serviceTier
 	var inputCacheWrite int32 = 0
 	this.InputCacheWrite = &inputCacheWrite
 	return &this
@@ -53,6 +55,8 @@ func NewTokenUsage(input int32, inputCached int32, output int32, reasoning int32
 // but it doesn't guarantee that properties required by API are set
 func NewTokenUsageWithDefaults() *TokenUsage {
 	this := TokenUsage{}
+	var serviceTier ServiceTier = SERVICETIER_DEFAULT
+	this.ServiceTier = &serviceTier
 	var inputCacheWrite int32 = 0
 	this.InputCacheWrite = &inputCacheWrite
 	return &this
