@@ -155,7 +155,8 @@ func (c *Client) GetWorkflowRun(ctx context.Context, runID string) (*client.Work
 // it. The response carries the fully-resolved SSE URL alongside the token, so clients need no
 // host configuration.
 //
-// Connect before triggering a run: tokens emitted while nobody is subscribed are not replayed.
+// A fresh connection starts at the live tip, so connect before triggering a run, or set the
+// browser SDK's `replay` option to join a run already under way.
 func (c *Client) CreateStreamToken(
 	ctx context.Context,
 	thread string,
