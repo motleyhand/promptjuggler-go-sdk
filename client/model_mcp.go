@@ -23,7 +23,7 @@ var _ MappedNullable = &Mcp{}
 type Mcp struct {
 	// The MCP server tool’s name.
 	Name string `json:"name" validate:"regexp=[a-zA-Z0-9_-]+"`
-	// The URL of the MCP server.
+	// The URL of the MCP server. A password or a credential query parameter (api_key, token, …) must take its secret from a placeholder.
 	Url string `json:"url"`
 	// Environment variable holding the MCP server’s authorization token, referenced as ${NAME}.
 	AuthorizationToken NullableString `json:"authorizationToken,omitempty"`

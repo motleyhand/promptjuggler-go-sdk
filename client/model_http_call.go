@@ -23,7 +23,7 @@ var _ MappedNullable = &HttpCall{}
 type HttpCall struct {
 	// JSON schema of the parameters this tool expects.
 	ParamsSchema string `json:"paramsSchema"`
-	// The URL to call. Can contain ${ENV_VAR} and {{inputName}} placeholders.
+	// The URL to call. Can contain ${ENV_VAR} and {{inputName}} placeholders; a password or a credential query parameter (api_key, token, …) must take its secret from one.
 	Url    string `json:"url"`
 	Method string `json:"method"`
 	// The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders; a credential header (Authorization, *-Key, *-Token, …) must take its secret from one.
