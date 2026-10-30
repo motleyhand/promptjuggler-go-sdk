@@ -31,7 +31,7 @@ type CreatePromptRun struct {
 	Environment NullableString `json:"environment,omitempty"`
 	// Runtime environment variable overrides for this run. Keys must be UPPER_CASE. At most 50 entries, 64 KB total.
 	EnvVars map[string]string `json:"envVars,omitempty"`
-	// Arbitrary key-value metadata attached to the run. Values can be strings or arrays of strings.
+	// Arbitrary key-value metadata attached to the run. Values can be strings or arrays of strings. Each key can be up to 255 bytes, each value up to 1,024 bytes.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	// Memory channel within the thread. Prompts on the same channel share conversational history; different channels are isolated.
 	Channel *string `json:"channel,omitempty"`
