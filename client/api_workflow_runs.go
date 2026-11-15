@@ -46,7 +46,7 @@ Triggers an asynchronous workflow run with the given inputs and returns a run ID
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param slug Workflow Handle
-	@param version Specific version or tag or id
+	@param version A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.
 	@return WorkflowRunsAPICreateWorkflowRunRequest
 */
 func (a *WorkflowRunsAPIService) CreateWorkflowRun(ctx context.Context, slug string, version string) WorkflowRunsAPICreateWorkflowRunRequest {

@@ -40,7 +40,7 @@ Retrieves the full configuration of a prompt revision including model, parameter
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param slug Prompt Handle
-	@param version Specific version or tag or id
+	@param version A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.
 	@return PromptsAPIGetPromptRevisionRequest
 */
 func (a *PromptsAPIService) GetPromptRevision(ctx context.Context, slug string, version string) PromptsAPIGetPromptRevisionRequest {
