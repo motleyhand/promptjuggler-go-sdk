@@ -20,10 +20,11 @@ type ServiceTier string
 
 // List of ServiceTier
 const (
-	SERVICETIER_AUTO     ServiceTier = "auto"
-	SERVICETIER_DEFAULT  ServiceTier = "default"
-	SERVICETIER_FLEX     ServiceTier = "flex"
-	SERVICETIER_PRIORITY ServiceTier = "priority"
+	SERVICETIER_AUTO      ServiceTier = "auto"
+	SERVICETIER_DEFAULT   ServiceTier = "default"
+	SERVICETIER_FLEX      ServiceTier = "flex"
+	SERVICETIER_FAST      ServiceTier = "fast"
+	SERVICETIER_ULTRAFAST ServiceTier = "ultrafast"
 )
 
 // All allowed values of ServiceTier enum
@@ -31,7 +32,8 @@ var AllowedServiceTierEnumValues = []ServiceTier{
 	"auto",
 	"default",
 	"flex",
-	"priority",
+	"fast",
+	"ultrafast",
 }
 
 func (v *ServiceTier) UnmarshalJSON(src []byte) error {
